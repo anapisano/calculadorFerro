@@ -3,7 +3,7 @@ const div = (a, b) => a / b;
 const sumar = (a, b) => a + b;
 const multi = (a, b) => a * b;
 
-const presupuestos = []
+let presupuestos = []
 
 let formulario
 let inputNombre
@@ -23,6 +23,23 @@ class Presupuesto {
     }
 
     area = () => (((this.alto * this.ancho) * 0.01) + ((this.alto * this.profundidad) * 0.01))
+    costoTotal = () => { 
+        let valorAMultiplicar = 0
+        switch (this.material){
+            case "MDF laqueado":
+                valorAMultiplicar = 1.5
+                break;
+            case "MDF enchapado":
+                valorAMultiplicar = 2.5
+                break;
+            case "MDF enchapado":
+                valorAMultiplicar = 2.5
+                break;
+            default:
+                valorAMultiplicar = 1
+        }
+
+        return this.area() * valorAMultiplicar }
 }
 
 function inicializarElementos (){
@@ -40,6 +57,18 @@ function inicializarEventos () {
     formulario.onsubmit = (event) => validarFormulario (event)
 }
 
+function almacenarPresupuestoLocalStorage() {
+    localStorage.setItem("presupuesto", JSON.stringify(presupuestos))
+
+}
+function obtenerPresupuestoLocalStorage() {
+    let presupuestoAlmacenado = localStorage.getItem ("presupuesto")
+    if (presupuestoAlmacenado != null){
+        presupuestos = JSON.parse(presupuestoAlmacenado)
+    }
+
+}
+
 function validarFormulario (event) {
     event.preventDefault()
     let nombre = inputNombre.value
@@ -51,6 +80,7 @@ function validarFormulario (event) {
     presupuestos.push(presupuesto)
     formulario.reset()   
     calcularPresupuesto()
+    almacenarPresupuestoLocalStorage()
 
 }
 
@@ -62,7 +92,7 @@ function calcularPresupuesto () {
                 <div class="card_body">
                     <p class="card_text">Presupuesto para: ${presupuesto.nombre}</p>
                     <p class="card_text">Las dimensiones de su mueble son: ${presupuesto.alto}cm * ${presupuesto.ancho}cm * ${presupuesto.profundidad}cm  </p>
-                    <p class="card_text">Costo total: ${presupuesto.area()}  </p>
+                    <p class="card_text">Costo total: ${presupuesto.costoTotal()}  </p>
                     <p class="card_text"></p>
                     <p class="card_text"></p>
                     <p class="card_text">Material: ${presupuesto.material}</p>      
@@ -85,6 +115,8 @@ el profe hizo el ejemplo con una tabla y no se como aplicarlo a divs */
 function main () {
     inicializarElementos()
     inicializarEventos()
+    obtenerPresupuestoLocalStorage()
+    calcularPresupuesto()
 }
 
 main()
