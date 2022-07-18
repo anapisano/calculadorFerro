@@ -65,6 +65,7 @@ function obtenerPresupuestoLocalStorage() {
     let presupuestoAlmacenado = localStorage.getItem ("presupuesto")
     if (presupuestoAlmacenado != null){
         presupuestos = JSON.parse(presupuestoAlmacenado)
+        presupuestos = presupuestos.map ((presupuesto) => new Presupuesto (presupuesto.nombre, presupuesto.alto, presupuesto.ancho, presupuesto.profundidad))
     }
 
 }
