@@ -86,6 +86,7 @@ function validarFormulario (event) {
 }
 
 function calcularPresupuesto () {
+    contenedorPresupuesto.innerHTML =""
     presupuestos.forEach ((presupuesto) =>{
         let columna = document.createElement("div")
         columna.innerHTML =`
@@ -103,15 +104,6 @@ function calcularPresupuesto () {
         contenedorPresupuesto.append (columna)
     })
 }
-
-/* no se como eliminar la impresion que se genera en el HTML, 
-el profe hizo el ejemplo con una tabla y no se como aplicarlo a divs */
-
-/* function limpiarLista () {
-    while ()
-}
- */
-
 
 function main () {
     inicializarElementos()
