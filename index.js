@@ -25,19 +25,7 @@ class Presupuesto {
     area = () => (((this.alto * this.ancho) * 0.01) + ((this.alto * this.profundidad) * 0.01))
     costoTotal = () => { 
         let valorAMultiplicar = 0
-        switch (this.material){
-            case "MDF laqueado":
-                valorAMultiplicar = 1.5
-                break;
-            case "MDF enchapado":
-                valorAMultiplicar = 2.5
-                break;
-            case "MDF enchapado":
-                valorAMultiplicar = 2.5
-                break;
-            default:
-                valorAMultiplicar = 1
-        }
+        this.material === "MDF laqueado" ? valorAMultiplicar = 1.5 : valorAMultiplicar = 2.5
 
         return this.area() * valorAMultiplicar }
 }
@@ -113,3 +101,7 @@ function main () {
 }
 
 main()
+
+const [a, b] = presupuestos
+
+console.log(b)
