@@ -4,6 +4,7 @@ const sumar = (a, b) => a + b;
 const multi = (a, b) => a * b;
 
 let presupuestos = []
+let materiales =[]
 
 let formulario
 let inputNombre
@@ -12,6 +13,20 @@ let inputAncho
 let inputProfundidad
 let inputMaterial
 let contenedorPresupuesto
+
+class Material {
+    constructor (id, nombre, precio) {
+        this.id = id;
+        this.nombre =nombre
+        this.precio = precio;
+    }
+}
+
+let laqueado = new Material (1, "MDF laqueado", 50)
+let enchapado = new Material (2, "MDF enchapado", 60)
+let poroAbierto = new Material (3, "Laqueado poro abierto", 80)
+
+materiales.push (laqueado, enchapado, poroAbierto)
 
 class Presupuesto {
     constructor(nombre, alto, ancho, profundidad, material) {
@@ -22,13 +37,15 @@ class Presupuesto {
         this.material = material;
     }
 
-    area = () => (((this.alto * this.ancho) * 0.01) + ((this.alto * this.profundidad) * 0.01))
+    area = () => (((this.alto * this.ancho) * 0.01) * 2 + ((this.alto * this.profundidad) * 0.01) * 2)
     costoTotal = () => { 
         let valorAMultiplicar = 0
         this.material === "MDF laqueado" ? valorAMultiplicar = 1.5 : valorAMultiplicar = 2.5
 
         return this.area() * valorAMultiplicar }
 }
+
+
 
 function inicializarElementos (){
     formulario = document.getElementById("formulario")
@@ -49,6 +66,7 @@ function almacenarPresupuestoLocalStorage() {
     localStorage.setItem("presupuesto", JSON.stringify(presupuestos))
 
 }
+
 function obtenerPresupuestoLocalStorage() {
     let presupuestoAlmacenado = localStorage.getItem ("presupuesto")
     if (presupuestoAlmacenado != null){
