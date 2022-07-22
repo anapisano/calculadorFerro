@@ -39,13 +39,10 @@ class Presupuesto {
 
     area = () => (((this.alto * this.ancho) * 0.01) * 2 + ((this.alto * this.profundidad) * 0.01) * 2)
     costoTotal = () => { 
-        let valorAMultiplicar = 0
-        this.material === "MDF laqueado" ? valorAMultiplicar = 1.5 : valorAMultiplicar = 2.5
-
-        return this.area() * valorAMultiplicar }
+        let valorAMultiplicar = materiales.find((el) => el.nombre === "MDF laqueado")
 }
-
-
+        
+}
 
 function inicializarElementos (){
     formulario = document.getElementById("formulario")
