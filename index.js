@@ -1,7 +1,20 @@
-const restar = (a, b) => a - b;
-const div = (a, b) => a / b;
-const sumar = (a, b) => a + b;
-const multi = (a, b) => a * b;
+let borrarStorage = document.getElementById("btn-borrar")
+borrarStorage.onclick = borrarLocalStorage
+
+function borrarLocalStorage() {
+    localStorage.clear()
+}
+
+const btnMostrarAlert = document.getElementById("btn-mostrar-alert")
+btnMostrarAlert.onclick = mostrarAlert
+
+function mostrarAlert() {
+    Swal.fire(
+        'Gracias por confiar en Ferro',
+        'Su presupuesto ha sido ingresado correctamente. <br> A la brevedad nos comunicaremos con usted',
+        'success'
+      )
+}
 
 let presupuestos = []
 let materiales =[]
@@ -40,6 +53,8 @@ class Presupuesto {
     area = () => (((this.alto * this.ancho) * 0.01) * 2 + ((this.alto * this.profundidad) * 0.01) * 2)
     costoTotal = () => { 
         let valorAMultiplicar = materiales.find((el) => el.nombre === "MDF laqueado")
+        let resultado = valorAMultiplicar.precio * this.area()
+        return resultado
 }
         
 }
@@ -116,7 +131,3 @@ function main () {
 }
 
 main()
-
-const [a, b] = presupuestos
-
-console.log(b)
