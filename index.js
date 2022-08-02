@@ -59,6 +59,14 @@ class Presupuesto {
         
 }
 
+function obtenerFoto () {
+    fetch ("https://jsonplaceholder.typicode.com/photos")
+    .then ((response) => response.json())
+    .then((data) => {
+        return data
+    })
+}
+
 function inicializarElementos (){
     formulario = document.getElementById("formulario")
     inputNombre = document.getElementById("nombre")
@@ -113,7 +121,7 @@ function calcularPresupuesto () {
                     <p class="card_text">Presupuesto para: ${presupuesto.nombre}</p>
                     <p class="card_text">Las dimensiones de su mueble son: ${presupuesto.alto}cm * ${presupuesto.ancho}cm * ${presupuesto.profundidad}cm  </p>
                     <p class="card_text">Costo total: ${presupuesto.costoTotal()}  </p>
-                    <p class="card_text"></p>
+                    <p class="card_text">foto: ${obtenerFoto()} </p>
                     <p class="card_text"></p>
                     <p class="card_text">Material: ${presupuesto.material}</p>      
                 </div>
@@ -123,11 +131,14 @@ function calcularPresupuesto () {
     })
 }
 
+
 function main () {
     inicializarElementos()
     inicializarEventos()
     obtenerPresupuestoLocalStorage()
+    obtenerFoto()
     calcularPresupuesto()
+    
 }
 
 main()
