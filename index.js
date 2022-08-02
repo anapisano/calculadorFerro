@@ -60,11 +60,9 @@ class Presupuesto {
 }
 
 function obtenerFoto () {
-    fetch ("https://jsonplaceholder.typicode.com/photos")
+    return fetch ("https://jsonplaceholder.typicode.com/photos")
     .then ((response) => response.json())
-    .then((data) => {
-        return data
-    })
+    .then((data) =>  data[3].url)
 }
 
 function inicializarElementos (){
@@ -111,7 +109,8 @@ function validarFormulario (event) {
 
 }
 
-function calcularPresupuesto () {
+async function calcularPresupuesto () {
+    const foto = await obtenerFoto()
     contenedorPresupuesto.innerHTML =""
     presupuestos.forEach ((presupuesto) =>{
         let columna = document.createElement("div")
@@ -121,7 +120,7 @@ function calcularPresupuesto () {
                     <p class="card_text">Presupuesto para: ${presupuesto.nombre}</p>
                     <p class="card_text">Las dimensiones de su mueble son: ${presupuesto.alto}cm * ${presupuesto.ancho}cm * ${presupuesto.profundidad}cm  </p>
                     <p class="card_text">Costo total: ${presupuesto.costoTotal()}  </p>
-                    <p class="card_text">foto: ${obtenerFoto()} </p>
+                    <p class="card_text">foto: ${foto}  </p>
                     <p class="card_text"></p>
                     <p class="card_text">Material: ${presupuesto.material}</p>      
                 </div>
