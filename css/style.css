@@ -3,7 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Crimson Text', serif;
 }
 
 body {
@@ -23,10 +23,20 @@ ul {
   list-style: none;
 }
 
-.logo {
+.hijo1 .logo {
+  margin: 15px;
+}
+
+.hijo1 h2 {
   margin: 15px;
 }
 
 .contenedor-formulario {
   background-color: #ff7fdf !important;
+  -webkit-box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.63);
+          box-shadow: 0px 0px 9px 3px rgba(0, 0, 0, 0.63);
+}
+
+.card {
+  margin: 10px;
 }

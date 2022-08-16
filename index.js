@@ -31,7 +31,7 @@ class Material {
     constructor (id, nombre, precio) {
         this.id = id;
         this.nombre =nombre
-        this.precio = precio;
+        this.precio = precio
     }
 }
 
@@ -44,15 +44,15 @@ materiales.push (laqueado, enchapado, poroAbierto)
 class Presupuesto {
     constructor(nombre, alto, ancho, profundidad, material) {
         this.nombre =nombre
-        this.alto = alto;
-        this.ancho = ancho;
-        this.profundidad = profundidad;
-        this.material = material;
+        this.alto = alto
+        this.ancho = ancho
+        this.profundidad = profundidad
+        this.material = material
     }
 
     area = () => (((this.alto * this.ancho) * 0.01) * 2 + ((this.alto * this.profundidad) * 0.01) * 2)
     costoTotal = () => { 
-        let valorAMultiplicar = materiales.find((el) => el.nombre === "MDF laqueado")
+        let valorAMultiplicar = materiales.find((el) => el.nombre === this.material)
         let resultado = valorAMultiplicar.precio * this.area()
         return resultado
 }
@@ -89,7 +89,7 @@ function obtenerPresupuestoLocalStorage() {
     let presupuestoAlmacenado = localStorage.getItem ("presupuesto")
     if (presupuestoAlmacenado != null){
         presupuestos = JSON.parse(presupuestoAlmacenado)
-        presupuestos = presupuestos.map ((presupuesto) => new Presupuesto (presupuesto.nombre, presupuesto.alto, presupuesto.ancho, presupuesto.profundidad))
+        presupuestos = presupuestos.map ((presupuesto) => new Presupuesto (presupuesto.nombre, presupuesto.alto, presupuesto.ancho, presupuesto.profundidad, presupuesto.material))
     }
 
 }
@@ -119,10 +119,10 @@ async function calcularPresupuesto () {
                 <div class="card_body">
                     <p class="card_text">Presupuesto para: ${presupuesto.nombre}</p>
                     <p class="card_text">Las dimensiones de su mueble son: ${presupuesto.alto}cm * ${presupuesto.ancho}cm * ${presupuesto.profundidad}cm  </p>
-                    <p class="card_text">Costo total: ${presupuesto.costoTotal()}  </p>
+                    <p class="card_text">Costo total: $ ${presupuesto.costoTotal()}  </p>
                     <p class="card_text">foto: ${foto}  </p>
                     <p class="card_text"></p>
-                    <p class="card_text">Material: ${presupuesto.material}</p>      
+                    <p class="card_text">Material seleccionado: ${presupuesto.material}</p>      
                 </div>
             </div>
             `
